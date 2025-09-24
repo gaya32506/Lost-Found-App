@@ -1,4 +1,3 @@
-// LostForm.jsx
 import React, { useState } from "react";
 
 export default function LostForm({ onSubmit }) {
@@ -6,8 +5,8 @@ export default function LostForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const lost = { ...form, _id: Date.now() }; // generate a unique id
-    onSubmit(lost); // pass to parent
+    const lost = { ...form, _id: Date.now() }; // generate unique id
+    onSubmit(lost); // pass item to App state
     setForm({ title: "", description: "", location: "", contact: "" });
     alert(" Lost item reported!");
   };

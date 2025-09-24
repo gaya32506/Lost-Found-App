@@ -1,4 +1,3 @@
-// FoundForm.jsx
 import React, { useState } from "react";
 
 export default function FoundForm({ onSubmit }) {
@@ -7,9 +6,9 @@ export default function FoundForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const found = { ...form, _id: Date.now() };
-    onSubmit(found); // pass to parent
+    onSubmit(found); // pass item to App state
     setForm({ title: "", description: "", location: "", contact: "" });
-    alert("Found item reported!");
+    alert(" Found item reported!");
   };
 
   return (
