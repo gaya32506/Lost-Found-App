@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+export default function ItemList({ type }) {
+  const [items, setItems] = useState([]);
 
-export default function ItemList({ items, title }) {
-  if (!items || items.length === 0) return null;
+  useEffect(() => {
+    fetch('http://localhost:5000/api/${type}')
+      .then((res) => res.json())
+      .then(setItems);
+  }, [type]);
 
   return (
     <div>
-      <h3>{title}</h3>
+      <h3>{type === "lost" ? " Lost Items" : "Found Items"}</h3>
       <ul>
-        {items.map(item => (
+        {items.map((item) => (
           <li key={item._id}>
             <b>{item.title}</b> — {item.location} <br />
             {item.description} <br />
