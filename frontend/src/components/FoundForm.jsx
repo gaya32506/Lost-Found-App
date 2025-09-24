@@ -1,22 +1,20 @@
+// FoundForm.jsx
 import React, { useState } from "react";
 
-export default function FoundForm() {
+export default function FoundForm({ onSubmit }) {
   const [form, setForm] = useState({ title: "", description: "", location: "", contact: "" });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await fetch("http://localhost:5000/api/found", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
-    });
-    alert("✅ Found item reported!");
+    const found = { ...form, _id: Date.now() };
+    onSubmit(found); // pass to parent
     setForm({ title: "", description: "", location: "", contact: "" });
+    alert("Found item reported!");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>🔍 Report Found Item</h3>
+      <h3> Report Found Item</h3>
       <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
       <input placeholder="Location" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
       <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}></textarea>
